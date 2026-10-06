@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { likeTheBlog } from '@/app/actions/blogs';
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const blog = getOneBlog(id);
+  const blog = await getOneBlog(Number(id));
   if (!blog) {
     notFound();
   }

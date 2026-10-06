@@ -7,11 +7,7 @@ const Blogs = async ({
 }) => {
   const { filter } = await searchParams;
 
-  const blogs = getBlogs().filter((blog) => {
-    return blog.title
-      .toLowerCase()
-      .includes(filter ? filter.toLowerCase() : '');
-  });
+  const blogs = await getBlogs(filter);
 
   return (
     <div>
