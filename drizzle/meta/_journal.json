@@ -8,6 +8,27 @@
       "when": 1791379748595,
       "tag": "0000_pale_dazzler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791482365534,
+      "tag": "0001_concerned_spectrum",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791673339409,
+      "tag": "0002_safe_guardsmen",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791681868546,
+      "tag": "0003_fair_warstar",
+      "breakpoints": true
     }
   ]
 }

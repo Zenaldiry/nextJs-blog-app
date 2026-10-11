@@ -1,6 +1,6 @@
 import { eq, ilike } from 'drizzle-orm';
 import { db } from '../../db/index';
-import { blogs } from '../../db/schema';
+import { blogs, readingList } from '../../db/schema';
 export const getBlogs = async (filter: string) => {
   if (filter) {
     return db.query.blogs.findMany({
@@ -16,8 +16,22 @@ export const getOneBlog = async (id: number) => {
   });
 };
 
-export const addBlog = async (title: string, author: string, url: string) => {
-  await db.insert(blogs).values({ title, author, url });
+export const addBlog = async (
+  title: string,
+  author: string,
+  url: string,
+  userId: number,
+) => {
+  const newBlog = await db
+    .insert(blogs)
+    .values({ title, author, url, userId })
+    .returning({ id: blogs.id });
+  const createdBlogId = newBlog[0].id;
+
+  await db.insert(readingList).values({
+    userId: userId,
+    blogId: createdBlogId,
+  });
 };
 
 export const likeBlog = async (id: number) => {
@@ -29,9 +43,3 @@ export const likeBlog = async (id: number) => {
       .where(eq(blogs.id, id));
   }
 };
-
-// export const filterBlogs = async (filter: string) => {
-//   return db.query.blogs.findMany({
-//     where: ilike(blogs.title, `%${filter}%`),
-//   });
-// };
